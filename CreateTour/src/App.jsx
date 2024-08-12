@@ -76,6 +76,11 @@ const App = () => {
                 setOpenProfile((prev) => !prev);
                 openProfile2 && setOpenProfile2(false);
                 handleCheckboxChange("checkbox1")
+
+                if(checked === "checkbox1"){
+                  handleCheckboxChange("!checkbox2");
+                }
+                
               }} id="terms" />
               <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                 Direct booking (No Referrals)
@@ -87,6 +92,10 @@ const App = () => {
                 setOpenProfile2((prev) => !prev);
                 openProfile && setOpenProfile(false);
                 handleCheckboxChange("checkbox2");
+                if(checked === "checkbox2"){
+                  handleCheckboxChange("!checkbox1");
+                }
+                
                 
               }} id="terms" />
               <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
