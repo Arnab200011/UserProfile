@@ -58,7 +58,7 @@ const App = () => {
     <div className="outer-contaier w-full flex justify-center items-center mt-20">
       <Card className="w-full max-w-2xl sm:max-w-3xl md:max-w-screen-lg p-3  px-8  flex flex-col items-center">
         <CardHeader>
-          <h1 className="flex justify-center text-xl font-extrabold">
+          <h1 className="flex justify-center text-2xl font-extrabold">
             CREATE A TOUR
           </h1>
           <p className="flex justify-center">
@@ -68,7 +68,7 @@ const App = () => {
 
         <CardContent className="max-w-lg ">
           <form>
-            <div className="flex mb-8  space-x-3">
+            <div className="flex mb-8 flex-col sm:flex-row  text-nowrap sm:gap-10 gap-3 items-start">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   checked={checked === "checkbox1"}
@@ -87,7 +87,7 @@ const App = () => {
                 </label>
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex self-start space-x-2">
                 <Checkbox
                   checked={checked === "checkbox2"}
                   onClick={() => {
