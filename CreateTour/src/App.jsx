@@ -1,167 +1,267 @@
 import React, { useState } from "react";
 import { Button } from "./components/ui/button";
-import user from "./assets/user.jpg";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-("use client");
 import { useToast } from "@/components/ui/use-toast";
-
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Toaster } from "@/components/ui/toaster";
-
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+const travellers = [
+  { name: "Apple", email: "apple@example.com", phone: "123-456-7890" },
+  { name: "Banana", email: "banana@example.com", phone: "234-567-8901" },
+  { name: "Blueberry", email: "blueberry@example.com", phone: "345-678-9012" },
+  { name: "Grapes", email: "grapes@example.com", phone: "456-789-0123" },
+  { name: "Pineapple", email: "pineapple@example.com", phone: "567-890-1234" },
+];
 
-import { cn } from "@/lib/utils";
-
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
+const agents = [
+  { name: "Apple", email: "apple@example.com", phone: "123-456-7890" },
+  { name: "Banana", email: "banana@example.com", phone: "234-567-8901" },
+  { name: "Blueberry", email: "blueberry@example.com", phone: "345-678-9012" },
+  { name: "Grapes", email: "grapes@example.com", phone: "456-789-0123" },
+  { name: "Pineapple", email: "pineapple@example.com", phone: "567-890-1234" },
 ];
 
 const App = () => {
   const { toast } = useToast();
   const [openProfile, setOpenProfile] = useState(false);
   const [openProfile2, setOpenProfile2] = useState(false);
-
-
   const [checked, setChecked] = useState(null);
+  const [selectedTraveller, setSelectedTraveller] = useState(null);
+  const [selectedAgent, setSelectedAgent] = useState(null);
 
   const handleCheckboxChange = (value) => {
     setChecked(value);
   };
 
-  return (
-    <div className="outer-contaier w-full flex justify-center items-center h-screen">
-      <Card className="w-full max-w-2xl sm:max-w-3xl md:max-w-screen-lg p-3 shadow-xl px-8">
-        <CardHeader>
-          <h1 className="flex justify-center">CREATE A TOUR</h1>
-          <h2 className="flex justify-center">Choose the type of tour you want to make</h2>
+  const handleTravellerSelectChange = (value) => {
+    const traveller = travellers.find(
+      (trav) => trav.name.toLowerCase() === value
+    );
+    setSelectedTraveller(traveller);
+  };
 
-          
+  const handleAgentSelectChange = (value) => {
+    const agent = agents.find((ag) => ag.name.toLowerCase() === value);
+    setSelectedAgent(agent);
+  };
+
+  return (
+    <div className="outer-contaier w-full flex justify-center items-center h-screen bg-red-100">
+      <Card className="w-full max-w-2xl sm:max-w-3xl md:max-w-screen-lg p-3  px-8 bg-slate-200 flex flex-col items-center">
+        <CardHeader>
+          <h1 className="flex justify-center text-xl font-extrabold">
+            CREATE A TOUR
+          </h1>
+          <p className="flex justify-center">
+            Choose the type of tour you want to make
+          </p>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="max-w-lg bg-green-300">
           <form>
-          <div className="flex justify-around mb-8">
-            <div className="flex items-center space-x-2">
-              <Checkbox checked={checked === "checkbox1"} onClick={() => {
-                setOpenProfile((prev) => !prev);
-                openProfile2 && setOpenProfile2(false);
-                handleCheckboxChange("checkbox1")
+            <div className="flex justify-around mb-8 bg-red-200">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  checked={checked === "checkbox1"}
+                  onClick={() => {
+                    setOpenProfile((prev) => !prev);
+                    openProfile2 && setOpenProfile2(false);
+                    handleCheckboxChange("checkbox1");
+                  }}
+                  id="terms1"
+                />
+                <label
+                  htmlFor="terms1"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Direct booking (No Referrals)
+                </label>
+              </div>
 
-                if(checked === "checkbox1"){
-                  handleCheckboxChange("!checkbox2");
-                }
-                
-              }} id="terms" />
-              <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Direct booking (No Referrals)
-              </label>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  checked={checked === "checkbox2"}
+                  onClick={() => {
+                    setOpenProfile2((prev) => !prev);
+                    openProfile && setOpenProfile(false);
+                    handleCheckboxChange("checkbox2");
+                  }}
+                  id="terms2"
+                />
+                <label
+                  htmlFor="terms2"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Referral Booking (Get coins for Referrals)
+                </label>
+              </div>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox checked={checked === "checkbox2"} onClick={() => {
-                setOpenProfile2((prev) => !prev);
-                openProfile && setOpenProfile(false);
-                handleCheckboxChange("checkbox2");
-                if(checked === "checkbox2"){
-                  handleCheckboxChange("!checkbox1");
-                }
-                
-                
-              }} id="terms" />
-              <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Referral Booking (Get coins for Referrals)
-              </label>
-            </div>
-          </div>
+            <div className={`${openProfile ? "" : "hidden"}`}>
+              <Select onValueChange={handleTravellerSelectChange}>
+                <SelectTrigger className="w-full bg-red-300">
+                  <SelectValue placeholder="Select Traveller" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Travellers</SelectLabel>
+                    {travellers.map((traveller) => (
+                      <SelectItem
+                        key={traveller.name}
+                        value={traveller.name.toLowerCase()}
+                      >
+                        {traveller.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
 
-          <div className={`${openProfile ? "" : "hidden"}`}>
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a fruit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className={`${openProfile2 ? "" : "hidden"} flex justify-center mt-8`}>
-            <div className="">
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a fruit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+              {selectedTraveller && (
+                <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                  <div className="flex flex-col gap-3 mb-4">
+                    <label htmlFor="travellerEmail">Email:</label>
+                    <input
+                      className="p-3"
+                      readOnly
+                      id="travellerEmail"
+                      value={selectedTraveller.email}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label htmlFor="travellerPhone">Phone No.</label>
+                    <input
+                      className="p-3"
+                      readOnly
+                      id="travellerPhone"
+                      value={selectedTraveller.phone}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="">
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a fruit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <div
+              className={`${
+                openProfile2 ? "" : "hidden"
+              } grid sm:grid-cols-2 gap-5 mt-8 bg-red-300`}
+            >
+              <div className="yoyo">
+                <Select onValueChange={handleTravellerSelectChange}>
+                  <SelectTrigger className="w-full bg-red-300">
+                    <SelectValue placeholder="Select Traveller" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Travellers</SelectLabel>
+                      {travellers.map((traveller) => (
+                        <SelectItem
+                          key={traveller.name}
+                          value={traveller.name.toLowerCase()}
+                        >
+                          {traveller.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                {selectedTraveller && (
+                  <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                    <div className="flex flex-col gap-3 mb-4">
+                      <label htmlFor="travellerEmail">Email:</label>
+                      <input
+                        className="p-3"
+                        readOnly
+                        id="travellerEmail"
+                        value={selectedTraveller.email}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <label htmlFor="travellerPhone">Phone No.</label>
+                      <input
+                        className="p-3"
+                        readOnly
+                        id="travellerPhone"
+                        value={selectedTraveller.phone}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="yoyo">
+                <Select onValueChange={handleAgentSelectChange}>
+                  <SelectTrigger className="w-full bg-red-300">
+                    <SelectValue placeholder="Select Agent" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Agents</SelectLabel>
+                      {agents.map((agent) => (
+                        <SelectItem
+                          key={agent.name}
+                          value={agent.name.toLowerCase()}
+                        >
+                          {agent.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                {selectedAgent && (
+                  <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                    <div className="flex flex-col gap-3 mb-4">
+                      <label htmlFor="agentEmail">Email:</label>
+                      <input
+                        className="p-3"
+                        readOnly
+                        id="agentEmail"
+                        value={selectedAgent.email}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <label htmlFor="agentPhone">Phone No.</label>
+                      <input
+                        className="p-3"
+                        readOnly
+                        id="agentPhone"
+                        value={selectedAgent.phone}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+
+            <div className="journey-details bg-slate-200 mt-5">
+              <div className="grid sm:grid-cols-2 content-center w-full sm:gap-8 gap-4 mb-6">
+                <div>
+                  <label htmlFor="start-date">Journey Start Date</label>
+                  <input type="date" id="start-date" placeholder="Date" className="rounded br text-slate-400 w-full p-2"/>
+                </div>
+                <div>
+                  <label htmlFor="end-date">Journey End Date</label>
+                  <input type="date" id="end-date" placeholder="Date" className="rounded text-slate-400 w-full p-2"/>
+                </div>
+              </div>
+                <div className="bg-red-100">
+                <label htmlFor="destination">Tour Destination</label>
+                <input type="text" id="start-date" placeholder="Type Here" className="rounded br text-slate-400 w-full p-2"/>
+                </div>
+            </div>
           </form>
           <div className="flex flex-wrap sm:justify-end gap-6 mt-4 justify-center">
-            <Button type="button" size={"lg"} variant={"outline"}>
+            <Button type="button" size="lg" variant="outline">
               Cancel
             </Button>
 
@@ -172,8 +272,8 @@ const App = () => {
                 })
               }
               type="submit"
-              size={"lg"}
-              variant={"outline"}
+              size="lg"
+              variant="outline"
             >
               Confirm
             </Button>
