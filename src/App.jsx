@@ -35,7 +35,6 @@ const App = () => {
         <CardHeader>
           <div className="profile flex items-center gap-3">
             <img
-              src={user}
               alt={"User image"}
               className="w-16 h-16 rounded-full object-cover"
             />
