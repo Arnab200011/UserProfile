@@ -55,8 +55,8 @@ const App = () => {
   };
 
   return (
-    <div className="outer-contaier w-full flex justify-center items-center h-screen bg-red-100">
-      <Card className="w-full max-w-2xl sm:max-w-3xl md:max-w-screen-lg p-3  px-8 bg-slate-200 flex flex-col items-center">
+    <div className="outer-contaier w-full flex justify-center items-center mt-20">
+      <Card className="w-full max-w-2xl sm:max-w-3xl md:max-w-screen-lg p-3  px-8  flex flex-col items-center">
         <CardHeader>
           <h1 className="flex justify-center text-xl font-extrabold">
             CREATE A TOUR
@@ -66,9 +66,9 @@ const App = () => {
           </p>
         </CardHeader>
 
-        <CardContent className="max-w-lg bg-green-300">
+        <CardContent className="max-w-lg ">
           <form>
-            <div className="flex justify-around mb-8 bg-red-200">
+            <div className="flex mb-8  space-x-3">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   checked={checked === "checkbox1"}
@@ -108,7 +108,7 @@ const App = () => {
 
             <div className={`${openProfile ? "" : "hidden"}`}>
               <Select onValueChange={handleTravellerSelectChange}>
-                <SelectTrigger className="w-full bg-red-300">
+                <SelectTrigger className="w-full ">
                   <SelectValue placeholder="Select Traveller" />
                 </SelectTrigger>
                 <SelectContent>
@@ -127,11 +127,11 @@ const App = () => {
               </Select>
 
               {selectedTraveller && (
-                <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                <div className="mt-4 p-4 border rounded-lg ">
                   <div className="flex flex-col gap-3 mb-4">
                     <label htmlFor="travellerEmail">Email:</label>
                     <input
-                      className="p-3"
+                      className="p-3 border"
                       readOnly
                       id="travellerEmail"
                       value={selectedTraveller.email}
@@ -140,7 +140,7 @@ const App = () => {
                   <div className="flex flex-col gap-3">
                     <label htmlFor="travellerPhone">Phone No.</label>
                     <input
-                      className="p-3"
+                      className="p-3 border"
                       readOnly
                       id="travellerPhone"
                       value={selectedTraveller.phone}
@@ -153,11 +153,11 @@ const App = () => {
             <div
               className={`${
                 openProfile2 ? "" : "hidden"
-              } grid sm:grid-cols-2 gap-5 mt-8 bg-red-300`}
+              } grid sm:grid-cols-2 gap-5 mt-8 `}
             >
               <div className="yoyo">
                 <Select onValueChange={handleTravellerSelectChange}>
-                  <SelectTrigger className="w-full bg-red-300">
+                  <SelectTrigger className="w-full ">
                     <SelectValue placeholder="Select Traveller" />
                   </SelectTrigger>
                   <SelectContent>
@@ -176,11 +176,11 @@ const App = () => {
                 </Select>
 
                 {selectedTraveller && (
-                  <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                  <div className="mt-4 p-4 border rounded-lg ">
                     <div className="flex flex-col gap-3 mb-4">
                       <label htmlFor="travellerEmail">Email:</label>
                       <input
-                        className="p-3"
+                        className="p-3 border"
                         readOnly
                         id="travellerEmail"
                         value={selectedTraveller.email}
@@ -189,7 +189,7 @@ const App = () => {
                     <div className="flex flex-col gap-3">
                       <label htmlFor="travellerPhone">Phone No.</label>
                       <input
-                        className="p-3"
+                        className="p-3 border"
                         readOnly
                         id="travellerPhone"
                         value={selectedTraveller.phone}
@@ -200,7 +200,7 @@ const App = () => {
               </div>
               <div className="yoyo">
                 <Select onValueChange={handleAgentSelectChange}>
-                  <SelectTrigger className="w-full bg-red-300">
+                  <SelectTrigger className="w-full ">
                     <SelectValue placeholder="Select Agent" />
                   </SelectTrigger>
                   <SelectContent>
@@ -219,11 +219,11 @@ const App = () => {
                 </Select>
 
                 {selectedAgent && (
-                  <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                  <div className="mt-4 p-4 border rounded-lg ">
                     <div className="flex flex-col gap-3 mb-4">
                       <label htmlFor="agentEmail">Email:</label>
                       <input
-                        className="p-3"
+                        className="p-3 border"
                         readOnly
                         id="agentEmail"
                         value={selectedAgent.email}
@@ -232,7 +232,7 @@ const App = () => {
                     <div className="flex flex-col gap-3">
                       <label htmlFor="agentPhone">Phone No.</label>
                       <input
-                        className="p-3"
+                        className="p-3 border"
                         readOnly
                         id="agentPhone"
                         value={selectedAgent.phone}
@@ -243,21 +243,53 @@ const App = () => {
               </div>
             </div>
 
-            <div className="journey-details bg-slate-200 mt-5">
+            <div className="journey-details  mt-5">
               <div className="grid sm:grid-cols-2 content-center w-full sm:gap-8 gap-4 mb-6">
                 <div>
                   <label htmlFor="start-date">Journey Start Date</label>
-                  <input type="date" id="start-date" placeholder="Date" className="rounded br text-slate-400 w-full p-2"/>
+                  <input
+                    type="date"
+                    id="start-date"
+                    placeholder="Date"
+                    className="rounded border text-slate-400 w-full p-2 mt-1"
+                  />
                 </div>
                 <div>
                   <label htmlFor="end-date">Journey End Date</label>
-                  <input type="date" id="end-date" placeholder="Date" className="rounded text-slate-400 w-full p-2"/>
+                  <input
+                    type="date"
+                    id="end-date"
+                    placeholder="Date"
+                    className="rounded border text-slate-400 w-full p-2 mt-1"
+                  />
                 </div>
               </div>
-                <div className="bg-red-100">
+              <div className=" mb-6">
                 <label htmlFor="destination">Tour Destination</label>
-                <input type="text" id="start-date" placeholder="Type Here" className="rounded br text-slate-400 w-full p-2"/>
-                </div>
+                <input
+                  type="text"
+                  id="start-date"
+                  placeholder="Type Here"
+                  className="rounded border text-slate-400 w-full p-2 mt-1"
+                />
+              </div>
+              <div className=" mb-6">
+                <label htmlFor="destination">Tour Package</label>
+                <input
+                  type="text"
+                  id="start-date"
+                  className="rounded border text-slate-400 w-full p-2 mt-1"
+                />
+              </div>
+              <div className=" mb-6">
+                <label htmlFor="destination">Amount</label>
+                <input
+                  type="text"
+                  id="start-date"
+                  placeholder="Manually type your amount"
+                  className="rounded border text-slate-400 w-full p-2 mt-1"
+                />
+              </div>
             </div>
           </form>
           <div className="flex flex-wrap sm:justify-end gap-6 mt-4 justify-center">
